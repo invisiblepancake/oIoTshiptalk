@@ -1,13 +1,19 @@
 #!/bin/bash
 
-# Read titles from the JSON file
+# Read titles from JSON
 titles=$(jq -r '.titles[]' titles.json)
-
-# Convert the titles into a bash array
 titles_array=($titles)
+
+# Read YAML settings
+default_member=$(yq '.default_member' config.yml)
+prefix=$(yq '.title_prefix' config.yml)
+suffix=$(yq '.title_suffix' config.yml)
 
 # Randomly select a title
 random_title=${titles_array[$RANDOM % ${#titles_array[@]}]}
 
-# Print the title
-echo "Your Random Title: $random_title"
+# Add prefix and suffix
+final_title="$prefix $random_title $suffix"
+
+# Print the title with member name
+echo "$default_member's Random Title: $final_title"

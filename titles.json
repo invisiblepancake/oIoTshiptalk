@@ -1,9 +1,16 @@
-{
-  "titles": [
-    "Supreme Juggler of Flaming Marulas",
-    "Minister of Bent Screws and Mayhem",
-    "Grandmaster of Controlled Chaos",
-    "High Priest of Cosmic Wi-Fi",
-    "Lead Pizza Box Strategist"
-  ]
-}
+#!/bin/bash
+
+# Read titles from JSON
+titles=$(jq -r '.titles[]' titles.json)
+titles_array=($titles)
+
+# Generate a random title
+new_title="Master of $(date +%s | sha256sum | base64 | head -c 10)"
+
+# Append new title to JSON
+jq --arg title "$new_title" '.titles += [$title]' titles.json > tmp.json && mv tmp.json titles.json
+
+# Select and display a title
+random_title=${titles_array[$RANDOM % ${#titles_array[@]}]}
+echo "New Title Added: $new_title"
+echo "Random Title: $random_title"

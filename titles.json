@@ -1,1 +1,9 @@
-nano titles.json
+{
+  "titles": [
+    "Supreme Juggler of Flaming Marulas",
+    "Minister of Bent Screws and Mayhem",
+    "Grandmaster of Controlled Chaos",
+    "High Priest of Cosmic Wi-Fi",
+    "Lead Pizza Box Strategist"
+  ]
+}
